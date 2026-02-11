@@ -1,5 +1,3 @@
-# Use this repo with Jenkins
+# App folder stores Sparta App
 
-## About the app
-- "app" folder stores Sparta app
-- uses Node JS v20
+check webhook works main branch 
