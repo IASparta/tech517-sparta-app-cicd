@@ -30,7 +30,7 @@
   - [Considerations](#considerations)
   - [Code](#code-1)
     - [If successful](#if-successful)
-  - [why we dont need to git clone](#why-we-dont-need-to-git-clone)
+  - [why we dont need to git clone in Job 3](#why-we-dont-need-to-git-clone-in-job-3)
 
 ## What is CI? Benifits?
 - CI = Continuous Integration 
@@ -265,6 +265,7 @@ npm test
   - build triggers 
     - Github hook trigger for GTScm polling
       - this ensures that jenkins is actually listening out for Github
+      - REMEMBER: job 1 is the only one that needs it as the other jobs will proceed after, otheriwse they end up running at the same time
 
 - go back to github repo 
   - settings
@@ -317,6 +318,9 @@ git push origin main
 
 ## Set up
 - The basic details of this settup are the same as job 2 
+  - remember you dont need:
+    - GitHub hook trigger for GITsm polling 
+    - 
 - make sure to go back to job 2 to associate job 3 through post build actions
 
 ## Considerations
@@ -351,13 +355,13 @@ EOF
 
 - `-- name SpartaApp`- Ive found that adding a name to the app helps identify it in the process lists if issues arise
 
-optional:
+Additional - strict host key checking configuration:
 
 ```shell
 scp -o StrictHostKeyChecking=no -r app ubuntu@$EC2_IP:/home/ubuntu/
 ```
 - `-o StrictHostKeyChecking=no`- essentially just skips the "Are you sure you want to continue connecting?" when you first ssh in 
-  - this doesnt matter if you arent ssh-ing for the first time
+  - this doesnt matter if you arent ssh-ing for the first time but recommeneded to have
 
 
 - changes can be made to the app e.g. adding a line `change via Jenkins CICD pipeline` by:
@@ -371,7 +375,7 @@ scp -o StrictHostKeyChecking=no -r app ubuntu@$EC2_IP:/home/ubuntu/
 <img src="image.png" alt="alt text" width="50%">
 
 
-## why we dont need to git clone
+## why we dont need to git clone in Job 3
 - the reason we dont git clone in the ec2 is for a few reasons:
   - the test (job 1), clones the app from github and tests it - this is the most up-to-date version
     - changes are pushed to main but we dont clone from main either 
